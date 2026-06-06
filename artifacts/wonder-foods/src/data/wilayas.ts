@@ -21,7 +21,7 @@ export const WILAYAS_CONFIG: WilayaConfig[] = [
     name: "BISKRA",
     agences: 2,
     big: true,
-    telegramBotToken: "8964924740:AAGeoHYcFVXN7QYOyM7ry2v1rK8Gsi4QSpY",
+    telegramBotToken: "8964924740:AAGeoHYcfVXN7QYOyM7ry2v1rK8Gsi4QSpY",
     telegramChatId:   "8958189104",
   },
 ];
