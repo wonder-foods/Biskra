@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Tag, UtensilsCrossed } from "lucide-react";
+import { Menu, X, UtensilsCrossed } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
 import { useTable } from "../contexts/TableContext";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,7 +12,6 @@ const NAV_LINKS = [
   { href: "/", label: "ACCUEIL" },
   { href: "/menu", label: "MENU" },
   { href: "/wilaya", label: "AGENCES" },
-  { href: "/promos", label: "PROMOS", isPromo: true },
 ];
 
 export default function Navbar() {
@@ -75,39 +74,22 @@ export default function Navbar() {
               const isActive = location === link.href;
               return (
                 <Link key={link.href} href={link.href}>
-                  {link.isPromo ? (
-                    <button
-                      style={{
-                        display: "flex", alignItems: "center", gap: 6,
-                        padding: "0 20px", height: 40,
-                        background: isActive ? "#F5C518" : "rgba(245,197,24,0.12)",
-                        border: "2px solid #F5C518",
-                        color: isActive ? "#000" : "#F5C518",
-                        fontFamily: "'Bebas Neue', sans-serif", fontSize: 15,
-                        letterSpacing: "0.15em", cursor: "pointer", marginLeft: 8,
-                      }}
-                      data-testid="nav-promos"
-                    >
-                      <Tag size={14} /> {link.label}
-                    </button>
-                  ) : (
-                    <button
-                      style={{
-                        padding: "0 18px", height: 72,
-                        background: "transparent",
-                        color: isActive ? "#fff" : "rgba(255,255,255,0.6)",
-                        fontFamily: "'Bebas Neue', sans-serif", fontSize: 15,
-                        letterSpacing: "0.15em", cursor: "pointer",
-                        border: "none",
-                        borderBottom: isActive ? "3px solid #F5C518" : "3px solid transparent",
-                        marginBottom: "-3px",
-                        transition: "all 0.2s",
-                      } as React.CSSProperties}
-                      data-testid={`nav-${link.label}`}
-                    >
-                      {link.label}
-                    </button>
-                  )}
+                  <button
+                    style={{
+                      padding: "0 18px", height: 72,
+                      background: "transparent",
+                      color: isActive ? "#fff" : "rgba(255,255,255,0.6)",
+                      fontFamily: "'Bebas Neue', sans-serif", fontSize: 15,
+                      letterSpacing: "0.15em", cursor: "pointer",
+                      border: "none",
+                      borderBottom: isActive ? "3px solid #F5C518" : "3px solid transparent",
+                      marginBottom: "-3px",
+                      transition: "all 0.2s",
+                    } as React.CSSProperties}
+                    data-testid={`nav-${link.label}`}
+                  >
+                    {link.label}
+                  </button>
                 </Link>
               );
             })}
@@ -200,7 +182,7 @@ export default function Navbar() {
                     width: "100%", textAlign: "left",
                     padding: "18px 24px",
                     background: location === link.href ? "#111" : "transparent",
-                    color: link.isPromo ? "#F5C518" : location === link.href ? "#fff" : "rgba(255,255,255,0.6)",
+                    color: location === link.href ? "#fff" : "rgba(255,255,255,0.6)",
                     fontFamily: "'Bebas Neue', sans-serif", fontSize: 20,
                     letterSpacing: "0.15em", cursor: "pointer",
                     display: "flex", alignItems: "center", gap: 10,
@@ -211,7 +193,7 @@ export default function Navbar() {
                   } as React.CSSProperties}
                   data-testid={`mobile-nav-${link.label}`}
                 >
-                  {link.isPromo && <Tag size={16} />} {link.label}
+                  {link.label}
                 </button>
               </Link>
             ))}

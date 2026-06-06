@@ -11,11 +11,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { WILAYAS_CONFIG, createRaniJayOrder, sendTelegramOrder, sendTableOrder } from "../data/wilayas";
 import cartIcon from "@assets/069ad48c-9e98-489a-8fc9-9b9ea27fcc40_1778282163458.png";
 
-const PROMO_CODES: Record<string, number> = {
-  WONDER2025: 10,
-  BISKRA10: 10,
-};
-
 const DELIVERY_FEE = 150;
 
 type Step = 1 | 2 | 3 | 4;
@@ -68,9 +63,6 @@ export default function Cart() {
   const isTable = !!tableNumber;
 
   const [step, setStep] = useState<Step>(1);
-  const [promoCode, setPromoCode] = useState("");
-  const [promoApplied, setPromoApplied] = useState<{ code: string; pct: number } | null>(null);
-  const [promoError, setPromoError] = useState("");
 
   // Delivery mode state
   const [customer, setCustomer] = useState<CustomerInfo>({ name: "", phone: "", wilayaId: "07", address: "", note: "" });
@@ -83,17 +75,10 @@ export default function Cart() {
   const [orderId, setOrderId] = useState("");
   const [trackingUrl, setTrackingUrl] = useState<string | null>(null);
 
-  const discount = promoApplied ? Math.round((subtotal * promoApplied.pct) / 100) : 0;
   const deliveryFee = isTable ? 0 : DELIVERY_FEE;
-  const total = subtotal + deliveryFee - discount;
+  const total = subtotal + deliveryFee;
 
   const selectedWilaya = WILAYAS_CONFIG.find((w) => w.id === customer.wilayaId);
-
-  const applyPromo = () => {
-    const c = promoCode.toUpperCase().trim();
-    if (PROMO_CODES[c]) { setPromoApplied({ code: c, pct: PROMO_CODES[c] }); setPromoError(""); }
-    else { setPromoError("CODE INVALIDE"); setPromoApplied(null); }
-  };
 
   const validateDeliveryStep2 = () => {
     const e: Partial<CustomerInfo> = {};
@@ -124,8 +109,7 @@ export default function Cart() {
       address: customer.address,
       note: customer.note,
       items: items.map((i) => ({ name: i.name, qty: i.quantity, price: i.price })),
-      subtotal, delivery: DELIVERY_FEE, discount, total,
-      promoCode: promoApplied?.code,
+      subtotal, delivery: DELIVERY_FEE, discount: 0, total,
       trackingUrl: result.trackingUrl,
     });
     clearCart();
@@ -143,8 +127,7 @@ export default function Cart() {
       customerName: tableInfo.name || "Client",
       note: tableInfo.note,
       items: items.map((i) => ({ name: i.name, qty: i.quantity, price: i.price })),
-      subtotal, discount, total,
-      promoCode: promoApplied?.code,
+      subtotal, discount: 0, total,
     });
     clearCart();
     setProcessing(false);
@@ -337,17 +320,6 @@ export default function Cart() {
                         <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 40, color: isTable ? "#F5C518" : "#E5041A" }}>{total} DA</span>
                       </div>
 
-                      {/* Promo */}
-                      <div style={{ marginBottom: 20 }}>
-                        <label style={labelStyle}>CODE PROMO</label>
-                        <div style={{ display: "flex" }}>
-                          <input value={promoCode} onChange={(e) => { setPromoCode(e.target.value); setPromoError(""); }} onKeyDown={(e) => e.key === "Enter" && applyPromo()} placeholder="EX: WONDER2025" style={{ ...inputStyle(), height: 44, borderRight: "none", flex: 1 }} data-testid="input-promo" />
-                          <button onClick={applyPromo} style={{ height: 44, padding: "0 16px", background: "#222", border: "2px solid #222", color: "#fff", fontFamily: "'Bebas Neue', sans-serif", fontSize: 14, cursor: "pointer" }} data-testid="btn-apply-promo">OK</button>
-                        </div>
-                        {promoError && <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 11, color: "#E5041A", marginTop: 4 }}>{promoError}</div>}
-                        {promoApplied && <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 11, color: "#27ae60", marginTop: 4 }}>-{promoApplied.pct}% APPLIQUÉ !</div>}
-                      </div>
-
                       <button onClick={() => setStep(2)} style={primaryBtn} data-testid="btn-next-step2">
                         CONTINUER <ChevronRight size={20} />
                       </button>
@@ -488,12 +460,6 @@ export default function Cart() {
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                           <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.3)" }}>LIVRAISON</span>
                           <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 14, color: "#fff" }}>{DELIVERY_FEE} DA</span>
-                        </div>
-                      )}
-                      {promoApplied && (
-                        <div style={{ display: "flex", justifyContent: "space-between" }}>
-                          <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 12, color: "#27ae60" }}>PROMO ({promoApplied.code})</span>
-                          <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 14, color: "#27ae60" }}>-{discount} DA</span>
                         </div>
                       )}
                       <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8 }}>
