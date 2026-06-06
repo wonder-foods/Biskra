@@ -1,0 +1,208 @@
+صمم واجهة UI/UX احترافية وفاخرة لتطبيق وموقع مطعم جزائري عصري باسم WONDER FOOD’S مستوحى من قوة وهوية McDonald’s لكن بلمسة جزائرية وطنية حديثة ومميزة.
+الهوية البصرية تعتمد على:
+
+
+الأسود الفخم كلون أساسي
+
+
+الأحمر القوي للأزرار والعروض
+
+
+الأصفر الذهبي المستوحى من شعار المطعم
+
+
+تصميم عصري Fast Food Premium
+
+
+إضاءة نيون خفيفة
+
+
+واجهة نظيفة وسريعة وسهلة الاستعمال
+
+
+التطبيق خاص بسلسلة مطاعم كبيرة عندها أكثر من 20 فرع في الجزائر.
+أول شاشة تكون شاشة اختيار الولاية بطريقة احترافية جدا:
+
+
+خريطة الجزائر تفاعلية أو قائمة ولايات حديثة
+
+
+عند اختيار الولاية يظهر فرع Wonder Food’s الخاص بها
+
+
+بعدها يتم تحميل Menu خاص بتلك الولاية
+
+
+بعض الولايات قد تحتوي منتجات إضافية أو ناقصة حسب الفرع
+
+
+تجربة ذكية وكأن التطبيق عالمي مثل Uber Eats أو McDonald’s App
+
+
+تفاصيل التصميم المطلوبة:
+الصفحة الرئيسية:
+
+
+Hero Section ضخم يحتوي Burger أو Tacos أو Crispy Chicken سينمائي
+
+
+شعار Wonder Food’s بشكل فاخر
+
+
+عبارة مثل:
+“Le goût qui rassemble toute l’Algérie 🇩🇿”
+
+
+زر “Commander Maintenant”
+
+
+عرض أقرب فرع حسب الولاية
+
+
+واجهة اختيار الولاية:
+
+
+Cards Glassmorphism حديثة
+
+
+أيقونات الولايات
+
+
+Animation سلسة
+
+
+تصميم Premium Mobile First
+
+
+Search Bar للولايات
+
+
+واجهة المينيو:
+
+
+Categories Scroll حديث:
+Burgers / Tacos / Pizza / Shawarma / Desserts / Drinks
+
+
+صور أكل واقعية جدا بإضاءة إعلانية
+
+
+بطاقات منتجات شبيهة بتطبيقات عالمية
+
+
+زر Add To Cart عائم
+
+
+عرض السعر بالدينار الجزائري DA
+
+
+Badges مثل:
+“Popular”, “Spicy”, “New”
+
+
+تجربة المستخدم:
+
+
+Ultra Smooth UI
+
+
+Minimal + Premium
+
+
+Animations احترافية
+
+
+Shadows Soft
+
+
+Rounded Corners حديثة
+
+
+Responsive Mobile + Tablet + Desktop
+
+
+سرعة وبساطة في الطلب
+
+
+صفحة الفرع:
+
+
+صورة الفرع
+
+
+أوقات العمل
+
+
+التوصيل متاح أو لا
+
+
+تقييمات الزبائن
+
+
+عروض خاصة بالولاية
+
+
+ستايل التصميم:
+
+
+McDonald’s Inspired
+
+
+Apple-level Clean UI
+
+
+Fast Food Branding
+
+
+الجزائرية الحديثة + العالمية
+
+
+Cinematic Food Photography
+
+
+Dark Luxury Theme
+
+
+تفاصيل تقنية:
+
+
+تصميم UI كامل في Figma Style
+
+
+Modern Web App + Mobile App
+
+
+UX احترافي جدا
+
+
+قابل للتحويل إلى Flutter أو React بسهولة
+
+
+Components منظمة
+
+
+نظام Design System متكامل
+
+
+المطلوب بصريا:
+
+
+واجهات مستقبلية
+
+
+Typography قوية
+
+
+أيقونات احترافية
+
+
+صور أكل مغرية جدا
+
+
+Layout مرتب وفخم
+
+
+شعور بأن Wonder Food’s علامة عالمية جزائرية
+
+
+Ultra detailed, award winning UI design, Behance quality, Dribbble inspiration, modern fast food app, premium restaurant app, futuristic Algerian fast food brand, cinematic lighting, realistic food, luxury black red yellow color palette, smooth UX, elegant interface, highly detailed mobile app screens, modern website landing page, world-class branding.
