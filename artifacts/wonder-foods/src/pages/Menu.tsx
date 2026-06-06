@@ -159,20 +159,35 @@ export default function Menu() {
 
   useEffect(() => {
     fetchPrices().then((priceItems) => {
-      const priceMap: Record<string, number> = {};
-      priceItems.forEach((pi) => { priceMap[pi.id] = pi.price; });
-      const nameMap: Record<string, string> = {};
-      priceItems.forEach((pi) => { if (pi.name) nameMap[pi.id] = pi.name; });
-      setMenuData(
-        MENU_DATA.map((section) => ({
-          ...section,
-          items: section.items.map((item) => ({
-            ...item,
-            ...(priceMap[item.id] !== undefined ? { price: priceMap[item.id] } : {}),
-            ...(nameMap[item.id] ? { name: nameMap[item.id] } : {}),
-          })),
-        }))
-      );
+      const staticById: Record<string, MenuItem> = {};
+      MENU_DATA.forEach((s) => s.items.forEach((it) => { staticById[it.id] = it; }));
+
+      const sectionMeta: Record<string, { icon: string; accentColor: string }> = {};
+      MENU_DATA.forEach((s) => { sectionMeta[s.category] = { icon: s.icon, accentColor: s.accentColor }; });
+
+      const grouped: Record<string, MenuSection> = {};
+      priceItems.forEach((pi) => {
+        if (!grouped[pi.category]) {
+          grouped[pi.category] = {
+            category: pi.category,
+            icon: sectionMeta[pi.category]?.icon ?? "",
+            accentColor: sectionMeta[pi.category]?.accentColor ?? "#fff",
+            items: [],
+          };
+        }
+        const staticItem = staticById[pi.id];
+        grouped[pi.category].items.push({
+          id: pi.id,
+          name: pi.name,
+          price: pi.price,
+          desc: staticItem?.desc ?? "",
+          badges: staticItem?.badges ?? [],
+        });
+      });
+
+      const ordered = MENU_DATA.map((s) => grouped[s.category]).filter(Boolean) as MenuSection[];
+      const extras = Object.values(grouped).filter((g) => !MENU_DATA.some((s) => s.category === g.category));
+      setMenuData([...ordered, ...extras]);
     }).catch(() => { /* fallback to defaults */ });
   }, []);
 
