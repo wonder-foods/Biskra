@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Store, Bike, Star, ChevronLeft, ChevronRight, Tag, Gift, Coffee, IceCream, Phone, MapPin, ArrowRight, Instagram } from "lucide-react";
+import { Store, Bike, Star, ChevronLeft, ChevronRight, Gift, Coffee, IceCream, Phone, MapPin, ArrowRight, Instagram } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import hero1 from "@assets/aec055cb-0bb6-43ad-9da3-87a9194f0cac_1778301819228.png";
@@ -110,14 +110,6 @@ export default function Home() {
                 COMMANDER MAINTENANT <ArrowRight size={20} />
               </button>
             </Link>
-            <Link href="/promos">
-              <button
-                style={{ background: "#F5C518", color: "#000", fontFamily: "'Bebas Neue', sans-serif", fontSize: 18, letterSpacing: "0.15em", padding: "0 40px", height: 58, border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: 10 }}
-                data-testid="btn-promos"
-              >
-                <Tag size={18} /> VOIR LES PROMOS
-              </button>
-            </Link>
           </div>
         </div>
 
@@ -166,11 +158,6 @@ export default function Home() {
               <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 13, letterSpacing: "0.25em", color: "#E5041A", marginBottom: 4 }}>OFFRES DU JOUR</div>
               <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 52, letterSpacing: "0.05em", color: "#fff", lineHeight: 1 }}>MEILLEURES DEALS</div>
             </div>
-            <Link href="/promos">
-              <button style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 15, letterSpacing: "0.15em", color: "#F5C518", background: "transparent", border: "2px solid #F5C518", padding: "10px 24px", cursor: "pointer", display: "flex", alignItems: "center", gap: 8 }}>
-                TOUT VOIR <ArrowRight size={16} />
-              </button>
-            </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-0" style={{ border: "3px solid #E5041A" }}>
             {DEALS.map((deal, i) => (
