@@ -16,6 +16,7 @@ import Cart from "./pages/Cart";
 import Promos from "./pages/Promos";
 import TableSelect from "./pages/TableSelect";
 import LoaderScreen from "./components/LoaderScreen";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ function Router() {
         <Route path="/cart" component={Cart} />
         <Route path="/promos" component={Promos} />
         <Route path="/table" component={TableSelect} />
+        <Route path="/admin" component={Admin} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
@@ -50,14 +52,16 @@ function Router() {
 
 function App() {
   const [loaderDone, setLoaderDone] = useState(false);
+  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const isAdmin = window.location.pathname === `${base}/admin` || window.location.pathname === "/admin";
 
   return (
     <QueryClientProvider client={queryClient}>
       <TableProvider>
         <CartProvider>
           <TooltipProvider>
-            {!loaderDone && <LoaderScreen onDone={() => setLoaderDone(true)} />}
-            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            {!loaderDone && !isAdmin && <LoaderScreen onDone={() => setLoaderDone(true)} />}
+            <WouterRouter base={base}>
               <TableParamReader />
               <Router />
             </WouterRouter>

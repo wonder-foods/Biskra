@@ -1,9 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
 import { ShoppingCart, Plus, Minus, ChefHat } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
+
+import { fetchPrices } from "../lib/jsonbin";
 
 import iconCrepes         from "@assets/icons/crepes.png";
 import iconNosBoxs        from "@assets/icons/nos-boxs.png";
@@ -153,6 +155,22 @@ export default function Menu() {
   const [activeCategory, setActiveCategory] = useState(MENU_DATA[0].category);
   const [justAdded, setJustAdded] = useState<string | null>(null);
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const [menuData, setMenuData] = useState<typeof MENU_DATA>(MENU_DATA);
+
+  useEffect(() => {
+    fetchPrices().then((priceItems) => {
+      const priceMap: Record<string, number> = {};
+      priceItems.forEach((pi) => { priceMap[pi.id] = pi.price; });
+      setMenuData(
+        MENU_DATA.map((section) => ({
+          ...section,
+          items: section.items.map((item) =>
+            priceMap[item.id] !== undefined ? { ...item, price: priceMap[item.id] } : item
+          ),
+        }))
+      );
+    }).catch(() => { /* fallback to defaults */ });
+  }, []);
 
   const handleAdd = (item: MenuItem, category: string) => {
     addItem({ id: item.id, name: item.name, price: item.price, category });
@@ -174,7 +192,7 @@ export default function Menu() {
       {/* Sticky Category Nav */}
       <div style={{ position: "sticky", top: 72, zIndex: 40, background: "#000", borderBottom: "3px solid #111", overflowX: "auto" }} className="hide-scrollbar">
         <div className="max-w-7xl mx-auto px-4" style={{ display: "flex", gap: 0 }}>
-          {MENU_DATA.map(({ category, icon, accentColor }) => {
+          {menuData.map(({ category, icon, accentColor }) => {
             const isActive = activeCategory === category;
             return (
               <button
@@ -214,7 +232,7 @@ export default function Menu() {
           </span>
         </div>
 
-        {MENU_DATA.map((section) => {
+        {menuData.map((section) => {
           return (
             <div
               key={section.category}
