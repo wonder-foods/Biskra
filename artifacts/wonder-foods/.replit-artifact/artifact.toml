@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Wonder Food's"
+version = "1.0.0"
+id = "artifacts/wonder-foods"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21009
+
+[services.development]
+run = "pnpm --filter @workspace/wonder-foods run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/wonder-foods", "run", "build" ]
+publicDir = "artifacts/wonder-foods/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21009"
+BASE_PATH = "/"
