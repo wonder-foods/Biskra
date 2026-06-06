@@ -161,12 +161,16 @@ export default function Menu() {
     fetchPrices().then((priceItems) => {
       const priceMap: Record<string, number> = {};
       priceItems.forEach((pi) => { priceMap[pi.id] = pi.price; });
+      const nameMap: Record<string, string> = {};
+      priceItems.forEach((pi) => { if (pi.name) nameMap[pi.id] = pi.name; });
       setMenuData(
         MENU_DATA.map((section) => ({
           ...section,
-          items: section.items.map((item) =>
-            priceMap[item.id] !== undefined ? { ...item, price: priceMap[item.id] } : item
-          ),
+          items: section.items.map((item) => ({
+            ...item,
+            ...(priceMap[item.id] !== undefined ? { price: priceMap[item.id] } : {}),
+            ...(nameMap[item.id] ? { name: nameMap[item.id] } : {}),
+          })),
         }))
       );
     }).catch(() => { /* fallback to defaults */ });

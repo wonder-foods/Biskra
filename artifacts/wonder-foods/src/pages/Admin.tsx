@@ -60,6 +60,11 @@ export default function Admin() {
     setSaved(false);
   };
 
+  const handleNameChange = (id: string, val: string) => {
+    setItems((prev) => prev.map((it) => it.id === id ? { ...it, name: val } : it));
+    setSaved(false);
+  };
+
   const handleSave = async () => {
     setSaving(true);
     setError("");
@@ -145,7 +150,7 @@ export default function Admin() {
               <Lock size={20} color="#fff" />
             </div>
             <div>
-              <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 24, color: "#fff", lineHeight: 1 }}>لوحة التحكم — الأسعار</div>
+              <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 24, color: "#fff", lineHeight: 1 }}>لوحة التحكم — الأسعار والأسماء</div>
               <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 11, letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)" }}>
                 WONDER FOOD'S BISKRA
               </div>
@@ -199,28 +204,56 @@ export default function Admin() {
                   <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.25)" }}>{catItems.length} منتج</span>
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 12 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 12 }}>
                   {catItems.map((item) => (
                     <div
                       key={item.id}
                       style={{ background: "#0a0a0a", border: "2px solid #1a1a1a", padding: "18px 20px", display: "flex", flexDirection: "column", gap: 10 }}
                     >
-                      <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 17, color: "#fff", letterSpacing: "0.05em" }}>{item.name}</div>
-                      <div style={{ display: "flex", alignItems: "center", gap: 0, border: `2px solid ${CATEGORY_COLORS[category] || "#333"}` }}>
+                      {/* Name field */}
+                      <div>
+                        <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 10, letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", marginBottom: 6 }}>
+                          الاسم
+                        </div>
                         <input
-                          type="number"
-                          min="0"
-                          value={item.price}
-                          onChange={(e) => handlePriceChange(item.id, e.target.value)}
+                          type="text"
+                          value={item.name}
+                          onChange={(e) => handleNameChange(item.id, e.target.value)}
                           style={{
-                            flex: 1, height: 48, background: "#000", border: "none",
-                            color: CATEGORY_COLORS[category] || "#fff",
-                            fontFamily: "'Bebas Neue', sans-serif", fontSize: 28,
-                            padding: "0 14px", outline: "none",
+                            width: "100%", height: 40, background: "#000",
+                            border: `2px solid #222`,
+                            color: "#fff",
+                            fontFamily: "'Bebas Neue', sans-serif", fontSize: 16,
+                            letterSpacing: "0.05em",
+                            padding: "0 12px", outline: "none", boxSizing: "border-box",
+                            transition: "border-color 0.2s",
                           }}
+                          onFocus={(e) => (e.currentTarget.style.borderColor = CATEGORY_COLORS[category] || "#555")}
+                          onBlur={(e) => (e.currentTarget.style.borderColor = "#222")}
                         />
-                        <div style={{ padding: "0 14px", fontFamily: "'Bebas Neue', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.3)", borderLeft: "1px solid #1a1a1a", height: 48, display: "flex", alignItems: "center" }}>
-                          DA
+                      </div>
+
+                      {/* Price field */}
+                      <div>
+                        <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 10, letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", marginBottom: 6 }}>
+                          السعر
+                        </div>
+                        <div style={{ display: "flex", alignItems: "center", border: `2px solid ${CATEGORY_COLORS[category] || "#333"}` }}>
+                          <input
+                            type="number"
+                            min="0"
+                            value={item.price}
+                            onChange={(e) => handlePriceChange(item.id, e.target.value)}
+                            style={{
+                              flex: 1, height: 48, background: "#000", border: "none",
+                              color: CATEGORY_COLORS[category] || "#fff",
+                              fontFamily: "'Bebas Neue', sans-serif", fontSize: 28,
+                              padding: "0 14px", outline: "none",
+                            }}
+                          />
+                          <div style={{ padding: "0 14px", fontFamily: "'Bebas Neue', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.3)", borderLeft: "1px solid #1a1a1a", height: 48, display: "flex", alignItems: "center" }}>
+                            DA
+                          </div>
                         </div>
                       </div>
                     </div>
