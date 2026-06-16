@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Wonder Food's</title>
+<script>
+  var seg = window.location.pathname.replace('/Biskra', '').replace(/^\//, '');
+  var q = window.location.search.slice(1);
+  var h = window.location.hash.slice(1);
+  var redir = '/Biskra/' +
+    (seg ? '?p=' + encodeURIComponent(seg) + (q ? '&' + q : '') : (q ? '?' + q : '')) +
+    (h ? '#' + h : '');
+  window.location.replace(redir);
+</script>
+</head>
+<body></body>
+</html>

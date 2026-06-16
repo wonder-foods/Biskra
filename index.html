@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>Wonder Food's</title>
+    <meta name="description" content="Wonder Food's — Créperie artisanale depuis 2010, Biskra Algérie." />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Wonder Food's" />
+    <meta property="og:description" content="Wonder Food's — Créperie artisanale depuis 2010, Biskra Algérie." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Wonder Food's" />
+    <meta name="twitter:description" content="Wonder Food's — Créperie artisanale depuis 2010, Biskra Algérie." />
+    <link rel="icon" type="image/svg+xml" href="/Biskra/favicon.svg" />
+    <script>
+      (function () {
+        var p = new URLSearchParams(window.location.search).get('p');
+        if (p) {
+          var base = '/Biskra';
+          var path = '/' + p.replace(/^\//, '');
+          var rest = window.location.search
+            .replace(/[?&]p=[^&]*/g, '')
+            .replace(/^&/, '?');
+          window.history.replaceState(
+            null, '',
+            base + path + rest + window.location.hash
+          );
+        }
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script type="module" crossorigin src="/Biskra/assets/index-abcK-Kb5.js"></script>
+    <link rel="stylesheet" crossorigin href="/Biskra/assets/index-BZvRdkkV.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
